@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  db:
+    build: ./src/db/
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  backend:
+    build: ./src/backend/
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+  client:
+    build: ./src/client/
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
