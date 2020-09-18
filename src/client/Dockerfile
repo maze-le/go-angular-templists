@@ -1,6 +1,7 @@
 FROM nginx:1.19.2
 
 LABEL maintainer Mathias Vonende <mathias@vonende.de>
+LABEL version="1.0"
 
 # create container user and group
 # RUN useradd --user-group --system --create-home --no-log-init webserver

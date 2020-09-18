@@ -4,19 +4,24 @@ services:
   db:
     build: ./src/db/
     restart: always
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
   backend:
     build: ./src/backend/
+    environment:
+      # OWM_ACCESS_KEY: <secret>
+      OWM_ACCESS_KEY: f165b0ebc6ac14f2d5df588318d04ac7
     ports:
-      - "8081:8081"
+      - "8082:8082"
     depends_on:
       - db
-  client:
-    build: ./src/client/
-    ports:
-      - "8080:80"
-    depends_on:
-      - backend
+  # client:
+  #   build: ./src/client/
+  #   ports:
+  #     - "8080:80"
+  #   depends_on:
+  #     - backend
