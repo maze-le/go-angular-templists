@@ -49,10 +49,10 @@ func GetDbConnection() *gorm.DB {
 func populateDatabase(connection *gorm.DB) {
 
 	// initial fixtures
-	var leipzig = ent.City{Name: "Woo", OwmID: 6548737}
-	var berlin = ent.City{Name: "Woo", OwmID: 2950159}
-	var moscow = ent.City{Name: "Woo", OwmID: 524901}
-	var tokyo = ent.City{Name: "Woo", OwmID: 1850144}
+	var leipzig = ent.City{Name: "Leipzig", OwmID: 6548737}
+	var berlin = ent.City{Name: "Berlin", OwmID: 2950159}
+	var moscow = ent.City{Name: "Moscow", OwmID: 524901}
+	var tokyo = ent.City{Name: "Tokyo", OwmID: 1850144}
 
 	connection.Create(&leipzig)
 	connection.Create(&berlin)

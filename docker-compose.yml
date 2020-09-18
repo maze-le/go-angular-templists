@@ -13,15 +13,14 @@ services:
   backend:
     build: ./src/backend/
     environment:
-      # OWM_ACCESS_KEY: <secret>
-      OWM_ACCESS_KEY: f165b0ebc6ac14f2d5df588318d04ac7
+      OWM_ACCESS_KEY: <secret>
     ports:
       - "8082:8082"
     depends_on:
       - db
-  # client:
-  #   build: ./src/client/
-  #   ports:
-  #     - "8080:80"
-  #   depends_on:
-  #     - backend
+  client:
+    build: ./src/client/
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

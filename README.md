@@ -4,7 +4,7 @@ This project collects temperature values from a open weather map, stores city re
 
 ## Requirements
 
-In order to build the project you need docker [www.docker.com](https://www.docker.com/) with docker-compose [docs.docker.com/compose](https://docs.docker.com/compose/)
+In order to build the project you need docker [www.docker.com](https://www.docker.com/) with docker-compose [docs.docker.com/compose](https://docs.docker.com/compose/) and npm [www.npmjs.com](https://www.npmjs.com/).
 
 ## Project organization
 
@@ -24,7 +24,7 @@ and replace `<secret>` with your own API key.
 
 ## Build & Run
 
-`docker-compose -f docker-compose.yml up`
+`$ bash build.sh`
 
 ## Implemetation Details
 
@@ -32,13 +32,16 @@ and replace `<secret>` with your own API key.
 
 The database is a default postgres image from docker hub without any custom configuration.
 
-### Backend 
+### Backend
 
-The backend is a Model-Repository-Controller backend, implemented with `gorm` as ORM Layer to the database. It encapsulates transport logic in the controllers, found in: `src/controllers`, provides access to the (postgres) database with repositories in: `src/repositories` and describes the database entities with model-interfaces found in: `src/entities`. External services (open weather map) are implemented in: `src/services`.
+The backend is a Model-Repository-Controller backend, implemented with `gorm` as ORM Layer to the database. It encapsulates transport logic in the controllers, found in: `src/backend/controllers`, provides access to the (postgres) database with repositories in: `src/backend/repositories` and describes the database entities with model-interfaces found in: `src/backend/entities`. External services (open weather map) are implemented in: `src/backend/services`.
 
-The backend implements a custom error handler and a unified logging facilty found in: `src/middleware`. The controller and repo parts are CRUD services that implement the respective Index, Create, Read, Update and Delete opertaions.
+The backend implements a custom error handler and a unified logging facilty found in: `src/backend/middleware`. The controller and repo parts are CRUD services that implement the respective Index, Create, Read, Update and Delete opertaions.
 
 #### init and shutdown
 
 When the application starts, the database connection gets established. Then a signal handler is initialized to a ensure clean shutdown procedure on `SIGTERM` events: basically a database disconnect, that enforces writing or rolling back pending transactions. It then proceeds to start a http server on the port 8082.
 
+### Frontend
+
+The frontend is bundled locally with npm and build in the target dir: `src/client/dist`. This will be used as entry point for a dockerized nginx webserver.

@@ -1,0 +1,56 @@
+<h2>Cities</h2>
+
+<div>
+  <div class="md-padding" ng-cloak layout="column">
+    <mat-form-field>
+      <mat-select [(value)]="selected">
+        <mat-option
+          *ngFor="let c of collections"
+          [value]="c"
+          (onSelectionChange)="setTemperatures()"
+        >
+          {{ c.Name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="selected">
+      <div class="md-padding" ng-cloak layout="column">
+        <h3>{{ selected.Name }}</h3>
+        <div *ngFor="let temp of temperatures">
+          <h3>
+            <a [title]="temp.Name">
+              {{ temp.Name }}
+            </a>
+          </h3>
+          <p>ID: {{ temp.OwmID }}</p>
+          <p>Temperature: {{ temp.Temp }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="md-padding" ng-cloak layout="column">
+  <div class="md-padding" ng-cloak layout="row">
+    <mat-form-field>
+      <label>New City</label>
+      <input matInput (change)="updateNewCity($event)" />
+    </mat-form-field>
+    <button (click)="addCity()" mat-stroked-button>Add City</button>
+  </div>
+
+  <div class="md-padding" ng-cloak layout="row">
+    <mat-form-field>
+      <label>New Collection</label>
+      <input matInput (change)="updateCollection($event)" />
+    </mat-form-field>
+    <button (click)="addCollection()" mat-stroked-button>Add Collection</button>
+  </div>
+
+  <div class="md-padding" ng-cloak layout="row">
+    <button (click)="removeCollection()" mat-stroked-button>
+      Remove Collection
+    </button>
+  </div>
+</div>
