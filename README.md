@@ -24,6 +24,7 @@ and replace `<secret>` with your own API key.
 
 ## Build & Run
 
+`$ chmod +x ./build.sh`
 `$ bash build.sh`
 
 ## Implemetation Details
